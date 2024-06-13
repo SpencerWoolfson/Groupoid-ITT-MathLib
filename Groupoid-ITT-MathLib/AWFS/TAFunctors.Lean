@@ -1,5 +1,5 @@
-import Main.Arrows
-import Main.Triangle
+import AWFS.Arrows
+import AWFS.Triangle
 import Mathlib.CategoryTheory.Whiskering
 
 namespace CategoryTheory.Diagrams

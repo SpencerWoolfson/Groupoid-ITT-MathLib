@@ -11,7 +11,11 @@ package «Groupoid-ITT-MathLib» where
 require mathlib from git
   "https://github.com/leanprover-community/mathlib4.git"
 
-lean_lib «Main» {
+lean_lib «AWFS» {
+  -- add any library configuration options here
+}
+
+lean_lib «Groupoids» {
   -- add any library configuration options here
 }
 
