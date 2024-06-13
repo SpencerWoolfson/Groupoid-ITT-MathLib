@@ -14,15 +14,14 @@ structure FactorizationFunctor where
   func : (WalkingArrow ⥤ C) ⥤ (WalkingTriangle ⥤ C)
   cond : func ⋙ PreCompMiddleFunctor = Functor.id (WalkingArrow ⥤ C)
 
-def FF_Unit (FF : @FactorizationFunctor C _) : NatTrans (Functor.id (WalkingArrow ⥤ C)) (FF.func ⋙ PreCompRightFunctor) where
-  app F := by
-    rw [<- FF.cond]
-    simp
-    exact NatTrans_PCMF_PCRF (FF.func.obj F)
-  naturality := by
-    intros F G η
+def FF_Unit (FF : @FactorizationFunctor C _) : NatTrans (Functor.id (WalkingArrow ⥤ C)) (FF.func ⋙ PreCompRightFunctor) := by
+  rw [<- FF.cond]
+  apply NatTrans.hcomp (NatTrans.id FF.func)
+  simp [Quiver.Hom]
+  exact (@NatTrans_PCMF_PCRF C _)
 
-
-
-
-    simp
+def FF_CoUnit (FF : @FactorizationFunctor C _) : NatTrans (FF.func ⋙ PreCompLeftFunctor) (Functor.id (WalkingArrow ⥤ C)) := by
+  rw [<- FF.cond]
+  apply NatTrans.hcomp (NatTrans.id FF.func)
+  simp [Quiver.Hom]
+  exact (@NatTrans_PCLF_PCMF C _)

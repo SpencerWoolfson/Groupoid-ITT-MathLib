@@ -97,7 +97,7 @@ theorem PCRF_map_morph (F : WalkingTriangle ⥤ C) : ((PreCompRightFunctor).obj 
 
 
 
-def NatTrans_PCMF_PCRF (F : WalkingTriangle ⥤ C) : NatTrans (PreCompMiddleFunctor.obj F) (PreCompRightFunctor.obj F) where
+def NatTrans_PCMF_PCRF_obj (F : WalkingTriangle ⥤ C) : NatTrans (PreCompMiddleFunctor.obj F) (PreCompRightFunctor.obj F) where
   app X := by
     simp [PreCompMiddleFunctor,PreCompRightFunctor]
     exact F.map (Right_Up.app X)
@@ -108,7 +108,11 @@ def NatTrans_PCMF_PCRF (F : WalkingTriangle ⥤ C) : NatTrans (PreCompMiddleFunc
     rw [<- F.map_comp,<- F.map_comp,<- F.map_comp]
     simp [Right_Up]
 
-def NatTrans_PCRF_PCMF (F : WalkingTriangle ⥤ C) : NatTrans (PreCompLeftFunctor.obj F) (PreCompMiddleFunctor.obj F) where
+def NatTrans_PCMF_PCRF : NatTrans (@PreCompMiddleFunctor C _) (@PreCompRightFunctor C _) := by
+  simp [PreCompMiddleFunctor,PreCompRightFunctor]
+  exact (whiskeringLeft WalkingArrow WalkingTriangle C).map Right_Up
+
+def NatTrans_PCLF_PCMF_obj (F : WalkingTriangle ⥤ C) : NatTrans (PreCompLeftFunctor.obj F) (PreCompMiddleFunctor.obj F) where
   app X := by
     simp [PreCompMiddleFunctor,PreCompRightFunctor]
     exact F.map (Left_Down.app X)
@@ -118,3 +122,7 @@ def NatTrans_PCRF_PCMF (F : WalkingTriangle ⥤ C) : NatTrans (PreCompLeftFuncto
     cases f <;> simp[MiddleFunctor,RightFunctor]
     rw [<- F.map_comp,<- F.map_comp,<- F.map_comp]
     simp
+
+def NatTrans_PCLF_PCMF : NatTrans (@PreCompLeftFunctor C _) (@PreCompMiddleFunctor C _) := by
+  simp [PreCompMiddleFunctor,PreCompLeftFunctor]
+  exact (whiskeringLeft WalkingArrow WalkingTriangle C).map Left_Down
