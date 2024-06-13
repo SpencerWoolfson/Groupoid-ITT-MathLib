@@ -1,29 +1,28 @@
-import Main.Arrows
-import Main.Triangle
-import Mathlib.CategoryTheory.Whiskering
+import Main.TAFunctors
 
-namespace CategoryTheory.Factorization
-
-universe v v₂ u u₂
-
-open CategoryTheory.Diagrams
+open CategoryTheory
+open Diagrams
+open WalkingTriangle
+open WalkingArrow
 open WalkingTriangleHom
 open WalkingArrowHom
 
+universe v v₂ u u₂
 variable {C : Type u} [Category.{v} C]
-
-def MiddleFunctor : WalkingArrow ⥤ WalkingTriangle where
-  obj x := match x with
-    | WalkingArrow.zero => WalkingTriangle.zero
-    | WalkingArrow.one => WalkingTriangle.two
-  map f := match f with
-    | WalkingArrowHom.id _ => WalkingTriangleHom.id _
-    | morph => middle
-  map_comp := by
-    rintro _ _ _ ⟨⟩ g <;> cases g <;> {dsimp; simp}
 
 structure FactorizationFunctor where
   func : (WalkingArrow ⥤ C) ⥤ (WalkingTriangle ⥤ C)
-  cond : func ⋙ ((whiskeringLeft WalkingArrow WalkingTriangle C).obj MiddleFunctor) = Functor.id (WalkingArrow ⥤ C)
+  cond : func ⋙ PreCompMiddleFunctor = Functor.id (WalkingArrow ⥤ C)
 
-def Unit (FF : FactorizationFunctor) :
+def FF_Unit (FF : @FactorizationFunctor C _) : NatTrans (Functor.id (WalkingArrow ⥤ C)) (FF.func ⋙ PreCompRightFunctor) where
+  app F := by
+    rw [<- FF.cond]
+    simp
+    exact NatTrans_PCMF_PCRF (FF.func.obj F)
+  naturality := by
+    intros F G η
+
+
+
+
+    simp

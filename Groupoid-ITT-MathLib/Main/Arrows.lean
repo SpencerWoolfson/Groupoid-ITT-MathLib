@@ -3,9 +3,6 @@ import Mathlib.CategoryTheory.Functor.Category
 import Mathlib.CategoryTheory.EqToHom
 
 /-
-
-
-
 -/
 section
 
@@ -68,6 +65,8 @@ instance WalkingArrowHomCategory : SmallCategory WalkingArrow where
   comp_id := comp_id
   id_comp := id_comp
   assoc := assoc
+
+
 
 @[simp]
 theorem WalkingArrowHom_id (X : WalkingArrow) : WalkingArrowHom.id X = 𝟙 X :=

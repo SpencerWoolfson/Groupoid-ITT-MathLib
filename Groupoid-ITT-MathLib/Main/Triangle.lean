@@ -66,6 +66,9 @@ instance WalkingTriangleHomCategory : SmallCategory WalkingTriangle where
   id_comp := id_comp
   assoc := assoc
 
+theorem LR_comp : (WalkingTriangleHomCategory.comp left right) = middle := by
+  simp [CategoryStruct.comp,WalkingTriangleHom.comp]
+
 @[simp]
 theorem WalkingTriangleHom_id (X : WalkingTriangle) : WalkingTriangleHom.id X = 𝟙 X :=
   rfl
