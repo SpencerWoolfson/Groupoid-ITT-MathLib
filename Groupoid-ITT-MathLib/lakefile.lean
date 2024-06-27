@@ -19,6 +19,10 @@ lean_lib «Groupoids» {
   -- add any library configuration options here
 }
 
+lean_lib «Other» {
+  -- add any library configuration options here
+}
+
 @[default_target]
 lean_lib «GroupoidITTMathLib» where
   -- add any library configuration options here

@@ -66,8 +66,6 @@ instance WalkingArrowHomCategory : SmallCategory WalkingArrow where
   id_comp := id_comp
   assoc := assoc
 
-
-
 @[simp]
 theorem WalkingArrowHom_id (X : WalkingArrow) : WalkingArrowHom.id X = 𝟙 X :=
   rfl
@@ -147,6 +145,15 @@ equalities `f = f'`. -/
 def arrow.eqOfHomEq {f f' : X ⟶ Y} (hf : f = f'):
     arrow f ≅ arrow f' :=
   arrow.ext (Iso.refl _) (Iso.refl _) (by simp [hf])
+
+def Arrow.NatTrans (F G : WalkingArrow ⥤ C)(top : F.obj zero ⟶ G.obj zero)
+  (bot : F.obj one ⟶ G.obj one)(h : (F.map morph) ≫ bot = top ≫ (G.map morph))
+  : NatTrans F G where
+  app x := match x with
+    |zero => top
+    |one => bot
+  naturality x y f:= by
+    cases f <;> simp [h,Functor.map_id]
 
 end Diagrams
 

@@ -127,6 +127,8 @@ def diagramIsotriangle (F : WalkingTriangle ⥤ C) :
     F ≅ triangle (F.map left) (F.map right) :=
   NatIso.ofComponents (fun j => eqToIso <| by cases j <;> rfl) (by rintro _ _ (_|_|_) <;>simp)
 
+
+
 /-- Construct a morphism between triangles. -/
 def triangleHom {X' Y' Z': C} (f : X ⟶ Y)(f' : X' ⟶ Y')(g : Y ⟶ Z) (g' : Y' ⟶ Z') (p : X ⟶ X') (q : Y ⟶ Y')(r : Z ⟶ Z')
     (wf : f ≫ q = p ≫ f') (wg : g ≫ r = q ≫ g') : triangle f g ⟶ triangle f' g' where

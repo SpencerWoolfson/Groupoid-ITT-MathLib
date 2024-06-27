@@ -57,7 +57,7 @@ def Right_Up : NatTrans MiddleFunctor RightFunctor  where
   naturality _ _ η := by
     cases η <;> simp [RightFunctor,MiddleFunctor,LR_comp]
 
-def PreCompMiddleFunctor : (WalkingTriangle ⥤ C) ⥤  (WalkingArrow ⥤ C) :=
+def PreCompMiddleFunctor : (WalkingTriangle ⥤ C) ⥤ (WalkingArrow ⥤ C) :=
   ((whiskeringLeft WalkingArrow WalkingTriangle C).obj MiddleFunctor)
 
 @[simp]
@@ -68,7 +68,6 @@ theorem PCMF_obj_one (F : WalkingTriangle ⥤ C) : ((PreCompMiddleFunctor).obj F
 
 @[simp]
 theorem PCMF_map_morph (F : WalkingTriangle ⥤ C) : ((PreCompMiddleFunctor).obj F).map WalkingArrowHom.morph = F.map WalkingTriangleHom.middle := rfl
-
 
 def PreCompLeftFunctor : (WalkingTriangle ⥤ C) ⥤  (WalkingArrow ⥤ C) :=
   ((whiskeringLeft WalkingArrow WalkingTriangle C).obj LeftFunctor)
